@@ -1,0 +1,33 @@
+{
+  "name": "react-pomodoro",
+  "version": "1.0.0",
+  "description": "Pomodoro timer to be done with react. User is able to choose setup the time and to have break at the end.",
+  "source": "src/html/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabver82/react-pomodoro.git"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "react",
+    "parcel"
+  ],
+  "author": "Fabien Vermeiren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabver82/react-pomodoro/issues"
+  },
+  "homepage": "https://github.com/fabver82/react-pomodoro#readme",
+  "devDependencies": {
+    "parcel": "^2.4.1"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
