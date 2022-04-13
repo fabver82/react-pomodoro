@@ -8,7 +8,8 @@ export function App() {
                 <h1>Pomodoro</h1>
             </header>
             <main>
-                <Timer />
+                <Timer initialTime={75} initialStatus="PAUSE" />
+                {/* <Settings /> */}
             </main>
         </div>
     );
