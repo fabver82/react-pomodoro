@@ -40,7 +40,9 @@ export default function Timer({initialTime, initialStatus}) {
         <div>
             <div>{formatTime(seconds)}</div>
             <div>{status}</div>
-            <button onClick={start}>start</button>
+            <button onClick={start} {...(status === "START" ? "disabled" : "")}>
+                start
+            </button>
             <button onClick={addTime}>+</button>
             <button onClick={substractTime}>-</button>
         </div>
