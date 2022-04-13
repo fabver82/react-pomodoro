@@ -3,6 +3,7 @@ import {formatTime} from "./formatTime";
 
 export default function Timer({initialTime, initialStatus}) {
     // const [minutes, setMinutes] = useState(1);
+    const [initial, setInitial] = useState(initialTime);
     const [seconds, setSeconds] = useState(initialTime);
     const [status, setStatus] = useState(initialStatus);
 
@@ -15,6 +16,9 @@ export default function Timer({initialTime, initialStatus}) {
     };
     const addTime = () => {
         setSeconds(seconds + 60);
+        // console.log(seconds);
+        // setInitial(seconds + 60);
+        // console.log(initial);
     };
     const substractTime = () => {
         if (seconds >= 60) {
@@ -24,6 +28,10 @@ export default function Timer({initialTime, initialStatus}) {
         } else {
             setSeconds(1);
         }
+        setInitial(seconds);
+    };
+    const resetTime = () => {
+        setSeconds(initial);
     };
 
     useEffect(() => {
@@ -45,8 +53,21 @@ export default function Timer({initialTime, initialStatus}) {
             <button onClick={toggleStatus}>
                 {status == "STOP" ? "start" : "stop"}
             </button>
-            <button onClick={addTime}>+</button>
-            <button onClick={substractTime}>-</button>
+            <button
+                onClick={resetTime}
+                disabled={status === "START" ? true : false}>
+                reset
+            </button>
+            <button
+                onClick={addTime}
+                disabled={status === "START" ? true : false}>
+                +
+            </button>
+            <button
+                onClick={substractTime}
+                disabled={status === "START" ? true : false}>
+                -
+            </button>
         </div>
     );
 }
