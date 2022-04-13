@@ -21,20 +21,27 @@ export default function Timer({initialTime, initialStatus}) {
         }
     };
     const addTime = () => {
+        if (seconds < 60) {
+            setSeconds(seconds + 1);
+            setInitialSeconds(seconds + 1);
+            return;
+        }
         setSeconds(seconds + 60);
         setInitialSeconds(seconds + 60);
-        console.log(initialSeconds);
     };
     const substractTime = () => {
-        if (seconds >= 60) {
+        if (seconds > 60) {
             setSeconds(seconds - 60);
             setInitialSeconds(seconds - 60);
-        } else if (seconds >= 10) {
-            setSeconds(seconds - 10);
-            setInitialSeconds(seconds - 10);
-        } else {
-            setSeconds(1);
-            setInitialSeconds(1);
+            return;
+        }
+        if (seconds <= 1) {
+            return;
+        }
+        if (seconds <= 60) {
+            setSeconds(seconds - 1);
+            setInitialSeconds(seconds - 1);
+            return;
         }
     };
     const resetTime = () => {
@@ -58,6 +65,7 @@ export default function Timer({initialTime, initialStatus}) {
         if (status === "BREAK" && willRestart) {
             resetTime();
             setStatus("START");
+            setWillRestart(false);
         }
     }, [willRestart]);
 
