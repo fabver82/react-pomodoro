@@ -4,16 +4,20 @@ import useModal from "./useModal";
 import Modal from "./Modal";
 
 export default function Timer({initialTime, initialStatus}) {
+    const [willRestart, setWillRestart] = useState(false);
     const [initialSeconds, setInitialSeconds] = useState(initialTime);
     const [seconds, setSeconds] = useState(initialTime);
     const [status, setStatus] = useState(initialStatus);
     const {isShowing, toggle} = useModal();
+    let interval;
 
     const toggleStatus = () => {
         if (status === "START") {
             setStatus("STOP");
+            clearInterval(interval);
         } else {
             setStatus("START");
+            clearInterval(interval);
         }
     };
     const addTime = () => {
@@ -38,10 +42,10 @@ export default function Timer({initialTime, initialStatus}) {
     };
 
     useEffect(() => {
-        let interval = setInterval(() => {
+        interval = setInterval(() => {
             clearInterval(interval);
             if (seconds === 0) {
-                setStatus("STOP");
+                setStatus("BREAK");
                 !isShowing ? toggle(true) : null;
             }
             if ((seconds !== 0) & (status === "START")) {
@@ -50,12 +54,24 @@ export default function Timer({initialTime, initialStatus}) {
         }, 1000);
     }, [seconds, status]);
 
+    useEffect(() => {
+        if (status === "BREAK" && willRestart) {
+            resetTime();
+            setStatus("START");
+        }
+    }, [willRestart]);
+
     return (
         <div>
-            <Modal isShowing={isShowing} hide={toggle} />
+            <Modal
+                isShowing={isShowing}
+                hide={toggle}
+                willRestart={willRestart}
+                setWillRestart={setWillRestart}
+            />
             <div>{formatTime(seconds)}</div>
             <button onClick={toggleStatus}>
-                {status == "STOP" ? "start" : "stop"}
+                {status == "STOP" || status == "BREAK" ? "start" : "stop"}
             </button>
             <button
                 onClick={resetTime}
@@ -71,9 +87,6 @@ export default function Timer({initialTime, initialStatus}) {
                 onClick={substractTime}
                 disabled={status === "START" ? true : false}>
                 -
-            </button>
-            <button className="modal-toggle" onClick={toggle}>
-                Show modal
             </button>
         </div>
     );
