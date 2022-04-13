@@ -6,9 +6,12 @@ export default function Timer({initialTime, initialStatus}) {
     const [seconds, setSeconds] = useState(initialTime);
     const [status, setStatus] = useState(initialStatus);
 
-    const start = () => {
-        setStatus("START");
-        console.log(status);
+    const toggleStatus = () => {
+        if (status === "START") {
+            setStatus("STOP");
+        } else {
+            setStatus("START");
+        }
     };
     const addTime = () => {
         setSeconds(seconds + 60);
@@ -27,7 +30,7 @@ export default function Timer({initialTime, initialStatus}) {
         let interval = setInterval(() => {
             clearInterval(interval);
             if (seconds === 0) {
-                setStatus("BREAK");
+                setStatus("STOP");
                 //show modal
             }
             if ((seconds !== 0) & (status === "START")) {
@@ -39,9 +42,8 @@ export default function Timer({initialTime, initialStatus}) {
     return (
         <div>
             <div>{formatTime(seconds)}</div>
-            <div>{status}</div>
-            <button onClick={start} {...(status === "START" ? "disabled" : "")}>
-                start
+            <button onClick={toggleStatus}>
+                {status == "STOP" ? "start" : "stop"}
             </button>
             <button onClick={addTime}>+</button>
             <button onClick={substractTime}>-</button>
