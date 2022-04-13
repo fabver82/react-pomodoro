@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {formatTime} from "./formatTime";
+import Modal from "./Modal";
+import "../modal.css";
 
 export default function Timer({initialTime, initialStatus}) {
-    // const [minutes, setMinutes] = useState(1);
-    const [initial, setInitial] = useState(initialTime);
     const [seconds, setSeconds] = useState(initialTime);
     const [status, setStatus] = useState(initialStatus);
+    const [modal, setModal] = useState(false);
 
     const toggleStatus = () => {
         if (status === "START") {
@@ -16,9 +17,6 @@ export default function Timer({initialTime, initialStatus}) {
     };
     const addTime = () => {
         setSeconds(seconds + 60);
-        // console.log(seconds);
-        // setInitial(seconds + 60);
-        // console.log(initial);
     };
     const substractTime = () => {
         if (seconds >= 60) {
@@ -28,7 +26,6 @@ export default function Timer({initialTime, initialStatus}) {
         } else {
             setSeconds(1);
         }
-        setInitial(seconds);
     };
     const resetTime = () => {
         setSeconds(initial);
@@ -40,6 +37,8 @@ export default function Timer({initialTime, initialStatus}) {
             if (seconds === 0) {
                 setStatus("STOP");
                 //show modal
+                console.log("show modal now");
+                setModal(true);
             }
             if ((seconds !== 0) & (status === "START")) {
                 setSeconds(seconds - 1);
@@ -49,6 +48,7 @@ export default function Timer({initialTime, initialStatus}) {
 
     return (
         <div>
+            <Modal show={modal} />
             <div>{formatTime(seconds)}</div>
             <button onClick={toggleStatus}>
                 {status == "STOP" ? "start" : "stop"}
