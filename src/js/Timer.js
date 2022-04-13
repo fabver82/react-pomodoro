@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {formatTime} from "./formatTime";
+import useModal from "./useModal";
 import Modal from "./Modal";
-import "../modal.css";
 
 export default function Timer({initialTime, initialStatus}) {
+    const [initialSeconds, setInitialSeconds] = useState(initialTime);
     const [seconds, setSeconds] = useState(initialTime);
     const [status, setStatus] = useState(initialStatus);
-    const [modal, setModal] = useState(false);
+    const {isShowing, toggle} = useModal();
 
     const toggleStatus = () => {
         if (status === "START") {
@@ -17,18 +18,23 @@ export default function Timer({initialTime, initialStatus}) {
     };
     const addTime = () => {
         setSeconds(seconds + 60);
+        setInitialSeconds(seconds + 60);
+        console.log(initialSeconds);
     };
     const substractTime = () => {
         if (seconds >= 60) {
             setSeconds(seconds - 60);
+            setInitialSeconds(seconds - 60);
         } else if (seconds >= 10) {
             setSeconds(seconds - 10);
+            setInitialSeconds(seconds - 10);
         } else {
             setSeconds(1);
+            setInitialSeconds(1);
         }
     };
     const resetTime = () => {
-        setSeconds(initial);
+        setSeconds(initialSeconds);
     };
 
     useEffect(() => {
@@ -36,9 +42,7 @@ export default function Timer({initialTime, initialStatus}) {
             clearInterval(interval);
             if (seconds === 0) {
                 setStatus("STOP");
-                //show modal
-                console.log("show modal now");
-                setModal(true);
+                !isShowing ? toggle(true) : null;
             }
             if ((seconds !== 0) & (status === "START")) {
                 setSeconds(seconds - 1);
@@ -48,7 +52,7 @@ export default function Timer({initialTime, initialStatus}) {
 
     return (
         <div>
-            <Modal show={modal} />
+            <Modal isShowing={isShowing} hide={toggle} />
             <div>{formatTime(seconds)}</div>
             <button onClick={toggleStatus}>
                 {status == "STOP" ? "start" : "stop"}
@@ -67,6 +71,9 @@ export default function Timer({initialTime, initialStatus}) {
                 onClick={substractTime}
                 disabled={status === "START" ? true : false}>
                 -
+            </button>
+            <button className="modal-toggle" onClick={toggle}>
+                Show modal
             </button>
         </div>
     );
