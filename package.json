@@ -25,6 +25,7 @@
   "homepage": "https://github.com/fabver82/react-pomodoro#readme",
   "devDependencies": {
     "@becode/eslint-config": "^0.13.0",
+    "@parcel/transformer-sass": "^2.4.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.13.0",
     "eslint-plugin-prettier": "^4.0.0",
