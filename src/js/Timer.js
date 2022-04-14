@@ -70,28 +70,39 @@ export default function Timer({initialTime, initialStatus}) {
     }, [willRestart]);
 
     return (
-        <div>
+        <div className="timer">
             <Modal
                 isShowing={isShowing}
                 hide={toggle}
                 willRestart={willRestart}
                 setWillRestart={setWillRestart}
             />
-            <div>{formatTime(seconds)}</div>
-            <button onClick={toggleStatus}>
+            <div className="timer__countdown">{formatTime(seconds)}</div>
+
+            <button
+                className="timer__button"
+                onClick={toggleStatus}
+                disabled={!willRestart && seconds == 0 ? true : false}>
                 {status == "STOP" || status == "BREAK" ? "start" : "stop"}
             </button>
             <button
+                className="timer__button"
                 onClick={resetTime}
-                disabled={status === "START" ? true : false}>
+                disabled={
+                    status === "START" || seconds == initialSeconds
+                        ? true
+                        : false
+                }>
                 reset
             </button>
             <button
+                className="timer__button"
                 onClick={addTime}
                 disabled={status === "START" ? true : false}>
                 +
             </button>
             <button
+                className="timer__button"
                 onClick={substractTime}
                 disabled={status === "START" ? true : false}>
                 -

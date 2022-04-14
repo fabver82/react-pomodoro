@@ -1,5 +1,24 @@
 @import "modal";
-body{
-    font-size:25px;
-    color:red
+h1{
+    font-size:3rem;
+    color:rgb(163, 7, 7)
+}
+.App{
+    margin:0 auto;
+    text-align:center;
+    background-color: rgb(255, 30, 30);
+    min-width:320px;
+    max-width:640px;
+    height: 100vh;
+}
+.timer{
+    font-size:4rem;
+    color:rgb(244, 244, 244);
+    &__button{
+        border-radius:50%;
+        padding:1rem;
+    }
+    &__button:hover{
+        background-color: rgb(163, 7, 7); 
+    }
 }
