@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function Reset({setSeconds, seconds, initialSeconds, status}) {
-    const resetTime = () => {
-        setSeconds(initialSeconds);
-    };
+export default function Reset({seconds, initialSeconds, status, resetTime}) {
     return (
         <button
             className="timer__button"
