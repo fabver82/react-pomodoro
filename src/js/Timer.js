@@ -4,7 +4,10 @@ import useModal from "./useModal";
 import Modal from "./Modal";
 import {Progress} from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {fas} from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
 export default function Timer({initialTime, initialStatus}) {
     const [willRestart, setWillRestart] = useState(false);
     const [initialSeconds, setInitialSeconds] = useState(initialTime);
@@ -106,7 +109,11 @@ export default function Timer({initialTime, initialStatus}) {
                     className="timer__button"
                     onClick={toggleStatus}
                     disabled={!willRestart && seconds == 0 ? true : false}>
-                    {status == "STOP" || status == "BREAK" ? "start" : "stop"}
+                    {status == "STOP" || status == "BREAK" ? (
+                        <FontAwesomeIcon icon="fa-solid fa-play" />
+                    ) : (
+                        <FontAwesomeIcon icon="fa-solid fa-stop" />
+                    )}
                 </button>
                 <button
                     className="timer__button"
@@ -122,13 +129,13 @@ export default function Timer({initialTime, initialStatus}) {
                     className="timer__button"
                     onClick={addTime}
                     disabled={status === "START" ? true : false}>
-                    +
+                    <FontAwesomeIcon icon="fa-solid fa-circle-plus" />
                 </button>
                 <button
                     className="timer__button"
                     onClick={substractTime}
                     disabled={status === "START" ? true : false}>
-                    -
+                    <FontAwesomeIcon icon="fa-solid fa-circle-minus" />
                 </button>
             </div>
         </div>
