@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import ReactDOM from "react-dom";
-import "../modal.css";
 
 const Modal = ({isShowing, hide, willRestart, setWillRestart}) => {
     function restart() {
