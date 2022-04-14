@@ -7,6 +7,8 @@ import "react-sweet-progress/lib/style.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
+import Play from "./Play";
+import Reset from "./Reset";
 library.add(fas);
 export default function Timer({initialTime, initialStatus}) {
     const [willRestart, setWillRestart] = useState(false);
@@ -16,15 +18,6 @@ export default function Timer({initialTime, initialStatus}) {
     const {isShowing, toggle} = useModal();
     let interval;
 
-    const toggleStatus = () => {
-        if (status === "START") {
-            setStatus("STOP");
-            clearInterval(interval);
-        } else {
-            setStatus("START");
-            clearInterval(interval);
-        }
-    };
     const addTime = () => {
         if (seconds < 60) {
             setSeconds(seconds + 1);
@@ -52,7 +45,6 @@ export default function Timer({initialTime, initialStatus}) {
     const resetTime = () => {
         setSeconds(initialSeconds);
     };
-
     useEffect(() => {
         interval = setInterval(() => {
             clearInterval(interval);
@@ -105,26 +97,19 @@ export default function Timer({initialTime, initialStatus}) {
                 }}
             />
             <div>
-                <button
-                    className="timer__button"
-                    onClick={toggleStatus}
-                    disabled={!willRestart && seconds == 0 ? true : false}>
-                    {status == "STOP" || status == "BREAK" ? (
-                        <FontAwesomeIcon icon="fa-solid fa-play" />
-                    ) : (
-                        <FontAwesomeIcon icon="fa-solid fa-stop" />
-                    )}
-                </button>
-                <button
-                    className="timer__button"
-                    onClick={resetTime}
-                    disabled={
-                        status === "START" || seconds == initialSeconds
-                            ? true
-                            : false
-                    }>
-                    reset
-                </button>
+                <Play
+                    setStatus={setStatus}
+                    willRestart={willRestart}
+                    seconds={seconds}
+                    status={status}
+                    interval={interval}
+                />
+                <Reset
+                    seconds={seconds}
+                    initialSeconds={initialSeconds}
+                    status={status}
+                    resetTime={resetTime}
+                />
                 <button
                     className="timer__button"
                     onClick={addTime}
