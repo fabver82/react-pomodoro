@@ -90,17 +90,17 @@ export default function Timer({initialTime, initialStatus}) {
                     error: {
                         symbol: formatTime(seconds),
                         trailColor: "blue",
-                        color: "red",
+                        color: "#c30232",
                     },
                     default: {
                         symbol: formatTime(seconds),
                         trailColor: "purple",
-                        color: "red",
+                        color: "#c30232",
                     },
                     active: {
                         symbol: formatTime(seconds),
                         trailColor: "purple",
-                        color: "red",
+                        color: "#c30232",
                     },
                 }}
             />
