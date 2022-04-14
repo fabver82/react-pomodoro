@@ -44,6 +44,15 @@ export default function Timer({initialTime, initialStatus}) {
     const resetTime = () => {
         setSeconds(initialSeconds);
     };
+    const toggleStatus = () => {
+        if (status === "START") {
+            setStatus("STOP");
+            clearInterval(interval);
+        } else {
+            setStatus("START");
+            clearInterval(interval);
+        }
+    };
     useEffect(() => {
         interval = setInterval(() => {
             clearInterval(interval);
@@ -80,28 +89,27 @@ export default function Timer({initialTime, initialStatus}) {
                 theme={{
                     error: {
                         symbol: formatTime(seconds),
-                        trailColor: "blue",
+                        trailColor: "rgb(202, 202, 202)",
                         color: "#c30232",
                     },
                     default: {
                         symbol: formatTime(seconds),
-                        trailColor: "purple",
-                        color: "#c30232",
+                        trailColor: "rgb(202, 202, 202)",
+                        color: "rgb(202, 202, 202)",
                     },
                     active: {
                         symbol: formatTime(seconds),
-                        trailColor: "purple",
+                        trailColor: "rgb(202, 202, 202)",
                         color: "#c30232",
                     },
                 }}
             />
             <div>
                 <Play
-                    setStatus={setStatus}
+                    toggleStatus={toggleStatus}
                     willRestart={willRestart}
                     seconds={seconds}
                     status={status}
-                    interval={interval}
                 />
                 <Reset
                     seconds={seconds}
