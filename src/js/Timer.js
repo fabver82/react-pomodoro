@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import {formatTime} from "./formatTime";
 import useModal from "./useModal";
 import Modal from "./Modal";
+import {Progress} from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 
 export default function Timer({initialTime, initialStatus}) {
     const [willRestart, setWillRestart] = useState(false);
@@ -76,6 +78,11 @@ export default function Timer({initialTime, initialStatus}) {
                 hide={toggle}
                 willRestart={willRestart}
                 setWillRestart={setWillRestart}
+            />
+            <Progress
+                type="circle"
+                percent={100 - (seconds / initialSeconds) * 100}
+                status={status == "BREAK" ? "success" : "active"}
             />
             <div className="timer__countdown">{formatTime(seconds)}</div>
 

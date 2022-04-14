@@ -39,7 +39,7 @@
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-js-progressbar": "^1.1.1"
+    "react-sweet-progress": "^1.1.2"
   },
   "lint-staged": {
     "*.json": [
