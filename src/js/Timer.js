@@ -4,10 +4,7 @@ import useModal from "./useModal";
 import Modal from "./Modal";
 import {Progress} from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
-import Play from "./Play";
-import Reset from "./Reset";
-import AddSecondBtn from "./AddSecondBtn";
-import SubSecondBtn from "./SubSecondBtn";
+import Settings from "./Settings";
 
 export default function Timer({initialTime, initialStatus}) {
     const [willRestart, setWillRestart] = useState(false);
@@ -16,34 +13,6 @@ export default function Timer({initialTime, initialStatus}) {
     const [status, setStatus] = useState(initialStatus);
     const {isShowing, toggle} = useModal();
     let interval;
-
-    const addTime = () => {
-        if (seconds < 60) {
-            setSeconds(seconds + 1);
-            setInitialSeconds(seconds + 1);
-            return;
-        }
-        setSeconds(seconds + 60);
-        setInitialSeconds(seconds + 60);
-    };
-    const substractTime = () => {
-        if (seconds > 60) {
-            setSeconds(seconds - 60);
-            setInitialSeconds(seconds - 60);
-            return;
-        }
-        if (seconds <= 1) {
-            return;
-        }
-        if (seconds <= 60) {
-            setSeconds(seconds - 1);
-            setInitialSeconds(seconds - 1);
-            return;
-        }
-    };
-    const resetTime = () => {
-        setSeconds(initialSeconds);
-    };
     const toggleStatus = () => {
         if (status === "START") {
             setStatus("STOP");
@@ -104,22 +73,15 @@ export default function Timer({initialTime, initialStatus}) {
                     },
                 }}
             />
-            <div>
-                <Play
-                    toggleStatus={toggleStatus}
-                    willRestart={willRestart}
-                    seconds={seconds}
-                    status={status}
-                />
-                <Reset
-                    seconds={seconds}
-                    initialSeconds={initialSeconds}
-                    status={status}
-                    resetTime={resetTime}
-                />
-                <AddSecondBtn addTime={addTime} status={status} />
-                <SubSecondBtn substractTime={substractTime} status={status} />
-            </div>
+            <Settings
+                toggleStatus={toggleStatus}
+                willRestart={willRestart}
+                seconds={seconds}
+                setSeconds={setSeconds}
+                status={status}
+                initialSeconds={initialSeconds}
+                setInitialSeconds={setInitialSeconds}
+            />
         </div>
     );
 }
