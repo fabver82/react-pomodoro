@@ -83,37 +83,54 @@ export default function Timer({initialTime, initialStatus}) {
                 type="circle"
                 percent={100 - (seconds / initialSeconds) * 100}
                 status={status == "BREAK" ? "success" : "active"}
+                theme={{
+                    error: {
+                        symbol: formatTime(seconds),
+                        trailColor: "blue",
+                        color: "red",
+                    },
+                    default: {
+                        symbol: formatTime(seconds),
+                        trailColor: "purple",
+                        color: "red",
+                    },
+                    active: {
+                        symbol: formatTime(seconds),
+                        trailColor: "purple",
+                        color: "red",
+                    },
+                }}
             />
-            <div className="timer__countdown">{formatTime(seconds)}</div>
-
-            <button
-                className="timer__button"
-                onClick={toggleStatus}
-                disabled={!willRestart && seconds == 0 ? true : false}>
-                {status == "STOP" || status == "BREAK" ? "start" : "stop"}
-            </button>
-            <button
-                className="timer__button"
-                onClick={resetTime}
-                disabled={
-                    status === "START" || seconds == initialSeconds
-                        ? true
-                        : false
-                }>
-                reset
-            </button>
-            <button
-                className="timer__button"
-                onClick={addTime}
-                disabled={status === "START" ? true : false}>
-                +
-            </button>
-            <button
-                className="timer__button"
-                onClick={substractTime}
-                disabled={status === "START" ? true : false}>
-                -
-            </button>
+            <div>
+                <button
+                    className="timer__button"
+                    onClick={toggleStatus}
+                    disabled={!willRestart && seconds == 0 ? true : false}>
+                    {status == "STOP" || status == "BREAK" ? "start" : "stop"}
+                </button>
+                <button
+                    className="timer__button"
+                    onClick={resetTime}
+                    disabled={
+                        status === "START" || seconds == initialSeconds
+                            ? true
+                            : false
+                    }>
+                    reset
+                </button>
+                <button
+                    className="timer__button"
+                    onClick={addTime}
+                    disabled={status === "START" ? true : false}>
+                    +
+                </button>
+                <button
+                    className="timer__button"
+                    onClick={substractTime}
+                    disabled={status === "START" ? true : false}>
+                    -
+                </button>
+            </div>
         </div>
     );
 }
