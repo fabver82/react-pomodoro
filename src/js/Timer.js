@@ -58,17 +58,17 @@ export default function Timer({initialTime, initialStatus}) {
                 theme={{
                     error: {
                         symbol: formatTime(seconds),
-                        trailColor: "rgb(202, 202, 202)",
+                        trailColor: "rgb(226, 155, 2)",
                         color: "#c30232",
                     },
                     default: {
                         symbol: formatTime(seconds),
-                        trailColor: "rgb(202, 202, 202)",
-                        color: "rgb(202, 202, 202)",
+                        trailColor: "rgb(226, 155, 2)",
+                        color: "rgb(226, 155, 2)",
                     },
                     active: {
                         symbol: formatTime(seconds),
-                        trailColor: "rgb(202, 202, 202)",
+                        trailColor: "rgb(226, 155, 2)",
                         color: "#c30232",
                     },
                 }}
