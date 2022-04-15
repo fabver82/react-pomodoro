@@ -14,7 +14,9 @@ const Modal = ({isShowing, hide, willRestart, setWillRestart}) => {
                           &times;
                       </span>
                       <p>Break Time</p>
-                      <button onClick={restart}>Restart Timer</button>
+                      <button className="timer__button" onClick={restart}>
+                          Restart Timer
+                      </button>
                   </div>
               </div>,
               document.body,

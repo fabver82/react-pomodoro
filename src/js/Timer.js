@@ -37,7 +37,7 @@ export default function Timer({initialTime, initialStatus}) {
 
     useEffect(() => {
         if (status === "BREAK" && willRestart) {
-            resetTime();
+            setSeconds(initialSeconds);
             setStatus("START");
             setWillRestart(false);
         }
